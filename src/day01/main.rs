@@ -22,10 +22,7 @@ fn exercise_one() -> usize {
             *prev = Some(i);
             Some(out)
         })
-        .filter(|s| match s {
-            PreviousValue::Increased(_) => true,
-            _ => false,
-        })
+        .filter(|s| matches!(s, PreviousValue::Increased(_)))
         .count()
 }
 
@@ -41,7 +38,7 @@ fn exercise_two() -> usize {
             if i + 3 > input.len() {
                 None
             } else {
-                Some(input[i..i + 3].iter().fold(0, |p, i| p + i))
+                Some(input[i..i + 3].iter().sum())
             }
         })
         .scan(Option::<Data>::None, |prev, i| {
@@ -54,10 +51,7 @@ fn exercise_two() -> usize {
             *prev = Some(i);
             Some(out)
         })
-        .filter(|s| match s {
-            PreviousValue::Increased(_) => true,
-            _ => false,
-        })
+        .filter(|s| matches!(s, PreviousValue::Increased(_)))
         .count()
 }
 

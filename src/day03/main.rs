@@ -46,11 +46,11 @@ fn exercise_two() {
             let element_at_i = matrix.iter().map(|line| line[i]).collect::<Vec<_>>();
 
             let criteria = if oxygen_generator_rating_method {
-                element_at_i.iter().filter(|i| **i == false).count()
-                    <= element_at_i.iter().filter(|i| **i == true).count()
+                element_at_i.iter().filter(|i| !(**i)).count()
+                    <= element_at_i.iter().filter(|i| **i).count()
             } else {
-                element_at_i.iter().filter(|i| **i == true).count()
-                    < element_at_i.iter().filter(|i| **i == false).count()
+                element_at_i.iter().filter(|i| **i).count()
+                    < element_at_i.iter().filter(|i| !(**i)).count()
             };
 
             matrix = matrix
@@ -70,7 +70,7 @@ fn exercise_two() {
 
     println!(
         "{:?}",
-        get_result(matrix.clone(), true) * get_result(matrix.clone(), false)
+        get_result(matrix.clone(), true) * get_result(matrix, false)
     );
 }
 

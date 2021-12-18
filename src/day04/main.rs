@@ -31,8 +31,8 @@ impl Grid {
                 Bingo::Set(_) => true,
                 Bingo::NotSet(_) => false,
             })
-        }) || (0..self.data[0].len()).fold(false, |prev, x| {
-            prev || self.data.iter().map(|i| i[x]).all(|i| match i {
+        }) || (0..self.data[0].len()).any(|x| {
+            self.data.iter().map(|i| i[x]).all(|i| match i {
                 Bingo::Set(_) => true,
                 Bingo::NotSet(_) => false,
             })
@@ -58,7 +58,7 @@ fn main() {
     let random_numbers = input
         .next()
         .unwrap()
-        .split(",")
+        .split(',')
         .map(str::parse::<i64>)
         .filter_map(Result::ok)
         .collect::<Vec<_>>();
